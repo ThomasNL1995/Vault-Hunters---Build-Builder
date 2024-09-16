@@ -314,7 +314,7 @@ const abilities = [
   },
   {
     maxLevel: 8,
-    cost: 2,
+    cost: 1  ,
     options: [
       {
         name: "Smite",
