@@ -75,7 +75,7 @@ const abilities = [
     selectedOption: null
   },
   {
-    maxLevel: 8,
+    maxLevel: 4,
     cost: 2,
     options: [
       {
@@ -382,7 +382,7 @@ const abilities = [
     selectedOption: null
   },
   {
-    maxLevel: 8,
+    maxLevel: 10,
     cost: 1,
     options: [
       {
@@ -534,7 +534,7 @@ const talents = [
     description: `Increases your movement speed by applying the speed effect permanently. <br> Every level of the speed effect increases movement speed by 20%. <br>
 1 <span style="color: green;">+1</span><br>
 2 <span style="color: green;">+2</span><br>`,
-    cost: 1,
+    cost: 4,
     level: 0,
     maxLevel: 2,
     talentGroup: null
@@ -754,7 +754,7 @@ const talents = [
 2 <span style="color: rgb(255, 235, 7);">50%</span><br>
 3 <span style="color: rgb(255, 235, 7);">70%</span><br>
 4 <span style="color: rgb(255, 235, 7);">90%</span><br>`,
-    cost: 1,
+    cost: 2,
     level: 0,
     maxLevel: 4,
     talentGroup: null,
