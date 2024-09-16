@@ -1127,7 +1127,7 @@ function createSkillDiv(container, skill, group = null) {
 }
 
 function handleSkillClick(skill, group) {
-  // if it is part of exclusive talents, don't add the point
+  // if it is part of exclusive talents, don't add the points
   if (skill.talentLink && getTalentLevelByName(skill.talentLink) > 0) return;
   
   
