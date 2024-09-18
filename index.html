@@ -1,72 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Vault Hunters - Build Builder</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-
-<body>
-  <div class="container">
-    <div class="header">
-      <h1 id="page-title">Vault Hunters - Build builder</h1>
-
-      <!-- Tabs for Abilities and Talents -->
-      <div class="tabs">
-        <button class="tab-button active" id="abilities-tab">Abilities</button>
-        <button class="tab-button" id="talents-tab">Talents</button>
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+      <title>Vault Hunters - Build Builder</title>
+      <link rel="stylesheet" href="styles.css">
+   </head>
+   <body>
+      <div class="container">
+         <div class="header">
+            <h1 id="page-title">Vault Hunters - Build builder</h1>
+         </div>
+         <div class="main">
+            <div class="main-left-column">
+               <!-- Tabs for Abilities and Talents -->
+               <div class="tabs">
+                  <button class="tab-button active" id="abilities-tab">Abilities</button>
+                  <button class="tab-button" id="talents-tab">Talents</button>
+               </div>
+               <div id="required-level-wrapper">Required level: <span id="required-level">10</span></div>
+               <!-- Ability/Talent description -->
+               <div id="description-box">
+                  <p id="description-text">Hover over an ability or talent to see its description. Left click to add a level. Right click to remove a level. Control + click maxes it out.</p>
+               </div>
+            </div>
+            <div class="main-right-column">
+               <!-- Abilities Grid -->
+               <div id="ability-grid" class="grid"></div>
+               <!-- Talents Grid (hidden by default) -->
+               <div id="talent-container" style="display: none;">
+                  <div id="talent-layout">
+                     <div id="talent-grid"></div>
+                     <div id="talent-groups">
+                        <div class="talent-group-wrapper">
+                           <div class="talent-group-info" id="masteries">Masteries: 0/10</div>
+                           <div class="talent-group" id="masteries-group"></div>
+                        </div>
+                        <div class="talent-group-wrapper">
+                           <div class="talent-group-info" id="lucky_hit">Lucky hit: 0/6</div>
+                           <div class="talent-group" id="lucky_hit-group"></div>
+                        </div>
+                        <div class="talent-group-wrapper">
+                           <div class="talent-group-info" id="javelin_enhancements">Javelin Enhancements: 0/10</div>
+                           <div class="talent-group" id="javelin-group"></div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div id="import-export-fields">
+            <div id="export-wrapper">
+               <button class="tab-button" id="share-button">Share</button>
+               <button class="tab-button" id="export-button">Export</button>
+               <input type="text" id="shareable-link" readonly/>
+            </div>
+            <div id="import-wrapper">
+               <textarea id="pasteArea" placeholder="Paste data here..."></textarea><button class="tab-button" id="importButton">Import Data</button>
+            </div>
+         </div>
+         <div id="toast" class="toast">Build string exported!</div>
+         <div id="import-toast-success" class="toast">Build succesfully imported!</div>
+         <div id="import-toast-fail" class="toast">Import failed.</div>
+         <div id="footer">Made by ThomasNL. For bugs of suggestions, message me on Discord</div>
       </div>
-
-      <div id="required-level-wrapper">Required level: <span id="required-level">10</span></div>
-
-    </div>
-    <!-- Ability/Talent description -->
-    <div id="description-box">
-      <p id="description-text">Hover over an ability or talent to see its description. Left click to add a level. Right click to remove a level. Control + click maxes it out.</p>
-    </div>
-
-    <!-- Abilities Grid -->
-    <div id="ability-grid" class="grid"></div>
-
-    <!-- Talents Grid (hidden by default) -->
-    <div id="talent-container" style="display: none;">
-      <div id="talent-layout">
-        <div id="talent-grid"></div>
-        <div id="talent-groups">
-          <div class="talent-group-wrapper">
-            <div class="talent-group-info" id="masteries">Masteries: 0/10</div>
-            <div class="talent-group" id="masteries-group"></div>
-          </div>
-          <div class="talent-group-wrapper">
-            <div class="talent-group-info" id="lucky_hit">Lucky hit: 0/6</div>
-            <div class="talent-group" id="lucky_hit-group"></div>
-          </div>
-          <div class="talent-group-wrapper">
-            <div class="talent-group-info" id="javelin_enhancements">Javelin Enhancements: 0/10</div>
-            <div class="talent-group" id="javelin-group"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div id="import-export-fields">
-        <div id="export-wrapper">
-            <button class="tab-button" id="share-button">Share</button>
-            <button class="tab-button" id="export-button">Export</button>
-            <input type="text" id="shareable-link" readonly/>
-        </div>   
-      <div id="import-wrapper">
-        <textarea id="pasteArea" placeholder="Paste data here..."></textarea><button class="tab-button" id="importButton">Import Data</button>
-      </div>
-    </div>
-    <div id="toast" class="toast">Build string exported!</div>
-    <div id="import-toast-success" class="toast">Build succesfully imported!</div>
-    <div id="import-toast-fail" class="toast">Import failed.</div>
-    <div id="footer">Made by ThomasNL. For bugs of suggestions, message me on Discord</div>
-  </div>
-
-  <script src="script.js"></script>
-</body>
-
+      <script src="script.js"></script>
+   </body>
 </html>
