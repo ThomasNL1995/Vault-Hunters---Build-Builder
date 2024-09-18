@@ -546,9 +546,9 @@ const talents = [
 1 <span style="color: green;">+1</span><br>
 2 <span style="color: green;">+2</span><br>
 3 <span style="color: green;">+3</span><br>`,
-    cost: 1,
+    cost: [1,1,2],
     level: 0,
-    maxLevel: 4,
+    maxLevel: 3,
     talentGroup: null
   },
   {
@@ -1133,7 +1133,7 @@ function handleSkillClick(skill, group) {
   
 
   const maxLevel = group ? group.maxLevel : skill.maxLevel;
-  const cost = group ? group.cost : skill.cost;
+  let cost = getCost(skill, group, false);
 
   if (group) {
     if (group.selectedOption && group.selectedOption !== skill) {
@@ -1147,7 +1147,7 @@ function handleSkillClick(skill, group) {
       // Increment level of the selected option
       if (skill.level < maxLevel) {
         if (ctrl_mod) {
-          pointsSpent += (maxLevel - skill.level) * cost;
+		  pointsSpent += getCostOfAmount(skill, group, maxLevel - skill.level);
           skill.level = maxLevel;
         } else {
           skill.level++;
@@ -1158,7 +1158,7 @@ function handleSkillClick(skill, group) {
       // Select this option if none was selected before
       group.selectedOption = skill;
       if (ctrl_mod) {
-        pointsSpent += (maxLevel - skill.level) * cost;
+        pointsSpent += getCostOfAmount(skill, group, maxLevel - skill.level);
         skill.level = maxLevel;
       } else {
         skill.level = 1;
@@ -1174,9 +1174,8 @@ function handleSkillClick(skill, group) {
       } else {
         levelsToAdd = getMaxAddableLevels(skill, 1);
       }
-
       if (levelsToAdd > 0) {
-        const pointsToAdd = levelsToAdd * cost;
+        const pointsToAdd = getCostOfAmount(skill, group, levelsToAdd);
         pointsSpent += pointsToAdd;
         updateTalentGroupCount(skill, pointsToAdd);
         skill.level += levelsToAdd;
@@ -1218,11 +1217,12 @@ function getMaxAddableLevels(skill, desiredLevels = Infinity) {
 function handleSkillRightClick(skill, group) {
   if (skill.level <= 0) return;
 
-  const cost = group ? group.cost : skill.cost;
+  let cost = getCost(skill, group, true);
 
   if (ctrl_mod) {
-    pointsSpent -= skill.level * cost;
-    updateTalentGroupCount(skill, -skill.level * cost);
+	let costOfCurrent = getCostOfCurrent(skill, group)
+    pointsSpent -= costOfCurrent;
+    updateTalentGroupCount(skill, -costOfCurrent);
     skill.level = 0;
   } else {
     skill.level--;
@@ -1233,6 +1233,49 @@ function handleSkillRightClick(skill, group) {
   updatePointsRemaining();
   updateGrid(activeTab === "abilities" ? abilities : talents);
 }
+
+function getCost(skill, group, rightclick) {
+	let cost = group ? group.cost : skill.cost;
+	let modifier = rightclick ? 1 : 0;
+	
+	if (Array.isArray(cost)) {
+		cost = cost[skill.level - modifier];
+	};
+	
+	return cost;
+};
+
+function getCostOfCurrent(skill, group) {
+	let cost = group ? group.cost : skill.cost;
+	let totalCost = 0;
+	if (Array.isArray(cost)) {
+		for (let i = 0; i < skill.level; i++) {
+			totalCost += cost[i];
+		};
+	} else {
+		totalCost = skill.level * cost;
+	};
+	return totalCost;
+    
+};
+
+function getCostOfAmount(skill, group, amount) {
+	console.log('running');
+	let cost = group ? group.cost : skill.cost;
+	let totalCost = 0;
+	if (Array.isArray(cost)) {
+		console.log('it is an array');
+		for (let i = 0; i < amount; i++) {
+			console.log(skill.level + i);
+			totalCost += cost[skill.level + i];
+		};
+	} else {
+		totalCost = amount * cost;
+	};
+	console.log(totalCost);
+	return totalCost;
+    
+};
 
 function updateTalentGroupCount(skill, change) {
   if (skill.talentGroup === "masteries") masteries_current += change;
@@ -1263,52 +1306,7 @@ function updatePointsRemaining() {
   ).textContent = `Javelin Enhancements: ${javelin_current}/${javelin_max}`;
 }
 
-// Listen for when any key is pressed
-document.addEventListener("keydown", function (event) {
-  if (event.key === "Control") {
-    ctrl_mod = true;
-  }
-});
 
-// Listen for when any key is released
-document.addEventListener("keyup", function (event) {
-  if (event.key === "Control") {
-    ctrl_mod = false;
-  }
-});
-
-abilitiesTab.addEventListener("click", () => {
-  talentsTab.classList.remove("active");
-  abilitiesTab.classList.add("active");
-  activeTab = "abilities";
-  updateGrid(abilities);
-  abilityGrid.style.display = "grid";
-  talentContainer.style.display = "none";
-});
-
-talentsTab.addEventListener("click", () => {
-  talentsTab.classList.add("active");
-  abilitiesTab.classList.remove("active");
-  activeTab = "talents";
-  updateGrid(talents);
-  abilityGrid.style.display = "none";
-  talentContainer.style.display = "grid";
-});
-
-function init(active_tab) {
-  if (active_tab = 'abilities') {
-    activeTab = 'abilities';
-    updateGrid(abilities);
-    abilityGrid.style.display = 'grid';
-    talentContainer.style.display = 'none';    
-  } else {
-    activeTab = "talents";
-    updateGrid(talents);
-    abilityGrid.style.display = "none";
-    talentContainer.style.display = "grid";
-  }
-    updatePointsRemaining();
-}
 
 // Function to export abilities and talents
 function exportData(abilities, talents) {
@@ -1496,7 +1494,7 @@ function serializeBuild() {
 
 function calculatePoints() {
   abilities.forEach(ability => {
-    let cost = ability.cost;
+	let cost = Array.isArray(ability.cost) ? ability.cost[ability.level] : ability.cost;
     ability.options.forEach(option => {
       pointsSpent += option.level * cost;
     });
@@ -1509,6 +1507,12 @@ function calculatePoints() {
   };
   
   talents.forEach(talent => {
+	let cost = Array.isArray(talent.cost) ? cost[talent.level] : talent.cost;
+	if (Array.isArray(talent.cost)) {
+		for (let i = 0; i < talent.level; i++) {
+			pointsSpent += talent.cost[i];
+		};
+	};
     pointsSpent += talent.level * talent.cost;
     if (talent.talentGroup) {
       updateTalentGroupCount(talent, talent.cost * talent.level)
@@ -1562,6 +1566,53 @@ document.getElementById('importButton').addEventListener('click', () => {
 });
 
 init('abilities')
+
+// Listen for when any key is pressed
+document.addEventListener("keydown", function (event) {
+  if (event.key === "Control") {
+    ctrl_mod = true;
+  }
+});
+
+// Listen for when any key is released
+document.addEventListener("keyup", function (event) {
+  if (event.key === "Control") {
+    ctrl_mod = false;
+  }
+});
+
+abilitiesTab.addEventListener("click", () => {
+  talentsTab.classList.remove("active");
+  abilitiesTab.classList.add("active");
+  activeTab = "abilities";
+  updateGrid(abilities);
+  abilityGrid.style.display = "grid";
+  talentContainer.style.display = "none";
+});
+
+talentsTab.addEventListener("click", () => {
+  talentsTab.classList.add("active");
+  abilitiesTab.classList.remove("active");
+  activeTab = "talents";
+  updateGrid(talents);
+  abilityGrid.style.display = "none";
+  talentContainer.style.display = "grid";
+});
+
+function init(active_tab) {
+  if (active_tab = 'abilities') {
+    activeTab = 'abilities';
+    updateGrid(abilities);
+    abilityGrid.style.display = 'grid';
+    talentContainer.style.display = 'none';    
+  } else {
+    activeTab = "talents";
+    updateGrid(talents);
+    abilityGrid.style.display = "none";
+    talentContainer.style.display = "grid";
+  }
+    updatePointsRemaining();
+}
 
 window.addEventListener('load', () => {
     loadBuildFromURL();
