@@ -1494,9 +1494,9 @@ function serializeBuild() {
 
 function calculatePoints() {
   abilities.forEach(ability => {
-	let cost = Array.isArray(ability.cost) ? ability.cost[ability.level] : ability.cost;
+	let cost = getCostOfCurrent(ability.skill, ability.group)
     ability.options.forEach(option => {
-      pointsSpent += option.level * cost;
+      pointsSpent += cost;
     });
   });
   
@@ -1507,15 +1507,10 @@ function calculatePoints() {
   };
   
   talents.forEach(talent => {
-	let cost = Array.isArray(talent.cost) ? cost[talent.level] : talent.cost;
-	if (Array.isArray(talent.cost)) {
-		for (let i = 0; i < talent.level; i++) {
-			pointsSpent += talent.cost[i];
-		};
-	};
-    pointsSpent += talent.level * talent.cost;
+    let cost = getCostOfCurrent(talent.skill, talent.group)
+    pointsSpent += cost;
     if (talent.talentGroup) {
-      updateTalentGroupCount(talent, talent.cost * talent.level)
+      updateTalentGroupCount(talent, cost)
     }
   })
 }
