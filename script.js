@@ -1245,7 +1245,8 @@ function getCost(skill, group, rightclick) {
 	return cost;
 };
 
-function getCostOfCurrent(skill, group) {
+function getCostOfCurrent(skill, group = null) {
+	console.log(skill);
 	let cost = group ? group.cost : skill.cost;
 	let totalCost = 0;
 	if (Array.isArray(cost)) {
@@ -1494,9 +1495,8 @@ function serializeBuild() {
 
 function calculatePoints() {
   abilities.forEach(ability => {
-	let cost = getCostOfCurrent(ability.skill, ability.group)
     ability.options.forEach(option => {
-      pointsSpent += cost;
+      pointsSpent += getCostOfCurrent(option, ability)
     });
   });
   
@@ -1507,7 +1507,7 @@ function calculatePoints() {
   };
   
   talents.forEach(talent => {
-    let cost = getCostOfCurrent(talent.skill, talent.group)
+    let cost = getCostOfCurrent(talent)
     pointsSpent += cost;
     if (talent.talentGroup) {
       updateTalentGroupCount(talent, cost)
