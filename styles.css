@@ -1,313 +1,400 @@
 	/* Reset and General Styles */
 	* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	color: #fff;
-	font-family: Rajdhani, sans-serif;
-	text-align: center;
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		color: #fff;
+		font-family: Rajdhani, sans-serif;
+		text-align: center;
 	}
 
 	body {
-	font-family: Arial, sans-serif;
-	display: flex;
-	padding-top: 50px;
-	justify-content: center;
-	align-items: flex-start;
-	height: 100vh;
-	background-color: #444;
-	background: url(https://vaulthunters.gg/assets/dark-5f2fb611.webp)
-	  center/cover no-repeat fixed;
+		font-family: Arial, sans-serif;
+		display: flex;
+		padding-top: 50px;
+		justify-content: center;
+		align-items: flex-start;
+		height: 100vh;
+		background-color: #444;
+		background: url(https://vaulthunters.gg/assets/dark-5f2fb611.webp) center/cover no-repeat fixed;
 	}
 
 	#page-title {
-	font-size: 1.5em;
-	color: #ffa800;
-	text-transform: uppercase;
+		font-size: 1.5em;
+		color: #ffa800;
+		text-transform: uppercase;
+		margin-bottom: 10px;
 	}
+
+	#build-menu-wrapper {
+		overflow: hidden;
+		transition: max-height 0.3s ease-out;
+		max-height: 0;
+		width: 50%;
+		margin: 10px auto;
+	  }	  
+
+	#saved-builds {
+		margin-bottom: 10px;
+	}
+	#build-menu {
+		background: rgba(5, 14, 27, 0.7);
+		border: 1px solid #ccc;
+		padding: 10px;
+		margin-bottom: 10px;
+	  }
+	  
+	  #build-menu h3 {
+		margin-top: 0;
+		margin-bottom: 10px;
+		font-size: 16px;
+		border-bottom: 1px solid #ccc;
+		padding-bottom: 5px;
+	  }
+	  
+	  .no-builds-message {
+		font-style: italic;
+		color: #666;
+	  }
+	  
+	  .build-item {
+		display: flex;
+		align-items: center;
+		margin-bottom: 10px;
+	  }
+	  
+	  .build-item img {
+		margin-right: 10px;
+	  }
+	  
+	  .build-item button {
+		margin-left: 10px;
+		padding: 5px 10px;
+		font-size: 12px;
+		background: #ffffff7a;
+		border: none;
+	  }
+
+	  .build-item button:hover {
+		cursor: pointer;
+		background: #ffffff36
+	  }
 
 	/* Tab Buttons */
 	.tabs {
-	margin: 20px 0;
-	display: flex;
-	justify-content: center;
-	gap: 5px;
+		margin: 20px 0;
+		display: flex;
+		justify-content: center;
+		align-items: flex-end;
+		gap: 5px;
 	}
 
 	.tab-button {
-	padding: 10px 25px;
-	font-size: 16px;
-	text-transform: uppercase;
-	font-weight: 700;
-	cursor: pointer;
-	background: #162132;
-	color: white;
-	border: 3px solid #162132;
-	margin-right: 5px;
+		padding: 10px 25px;
+		font-size: 16px;
+		text-transform: uppercase;
+		font-weight: 700;
+		cursor: pointer;
+		background: #162132;
+		color: white;
+		border: 3px solid #162132;
+		margin-right: 5px;
+		height: fit-content;
+
 	}
 
 	.tab-button:hover {
-	background: #1e2d45;
-	border-color: #1e2d45;
+		background: #1e2d45;
+		border-color: #1e2d45;
 	}
 
 	.tab-button.active {
-	border-color: #fff;
+		border-color: #fff;
+	}
+
+	.tabs .build-icon {
+		margin: 0;
+		height: auto;
+		width: auto;
+		background-color: #555454;
+		border-color: #555454;
+	}
+
+	.tabs .build-icon span {
+		position: absolute;
+		top: -32px;
+	}
+
+	.tabs .build-icon img {
+		width: 34px;
+		height: 34px;
+	}
+
+	.tabs .build-icon:hover {
+		background-color: #555454;
+		border-color: #555454;
+		cursor: default;
 	}
 
 	/* Points Display and Description */
 	#required-level.red {
-	color: red;
+		color: red;
 	}
 
 	#required-level-wrapper {
-	margin: 10px 0;
+		margin: 10px 0;
 	}
 
 	.main {
-	  margin-top: 25px;
-	  display: grid;
-	  grid-template-columns: 535px 50px 715px;
-	  grid-template-areas: "left . right";
+		margin-top: 25px;
+		display: grid;
+		grid-template-columns: 535px 50px 715px;
+		grid-template-areas: "left . right";
 	}
 
 	.main-left-column {
-	  grid-area: left;
-	  position: sticky;
-	  top: 25px;
-	  height: fit-content;
+		grid-area: left;
+		position: sticky;
+		top: 25px;
+		height: fit-content;
 	}
 
 	.main-right-column {
-	  grid-area: right;
+		grid-area: right;
 	}
 
 	#description-box {
-	padding: 10px;
-	background: rgba(5, 14, 27, 0.7);
-	height: fit-content;
+		padding: 10px;
+		background: rgba(5, 14, 27, 0.7);
+		height: fit-content;
 
 	}
 
 	#description-text {
-	font-size: 16px;
-	/*     font-weight: bold; */
-	line-height: 1.5em;
-	min-height: 14em;
+		font-size: 16px;
+		/*     font-weight: bold; */
+		line-height: 1.5em;
+		min-height: 14em;
 	}
 
 	#description-text .description-title {
-	font-size: 1.6rem;
-	color: #ffa800;
-	font-family: Rajdhani, sans-serif;
-	text-transform: uppercase;
-	font-weight: 700;
-	letter-spacing: 1px;
-	margin-bottom: 1rem;
+		font-size: 1.6rem;
+		color: #ffa800;
+		font-family: Rajdhani, sans-serif;
+		text-transform: uppercase;
+		font-weight: 700;
+		letter-spacing: 1px;
+		margin-bottom: 1rem;
 	}
 
 	/* Grid Layouts */
-	.grid, #talent-grid {
-	display: grid;
-	grid-template-columns: repeat(6, 1fr);
-	gap: 10px;
+	.grid,
+	#talent-grid {
+		display: grid;
+		grid-template-columns: repeat(6, 1fr);
+		gap: 10px;
 	}
 
 	#ability-grid {
-	  gap: 23px;
+		gap: 23px;
 	}
 
 	/* Talent Layouts */
 	#talent-container {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 	}
 
 	#talent-layout {
-	display: flex;
-	flex-direction: column;
-	row-gap: 20px;
+		display: flex;
+		flex-direction: column;
+		row-gap: 20px;
 	}
 
 	#talent-grid {
-	grid-template-rows: repeat(4, auto);
+		grid-template-rows: repeat(4, auto);
 	}
 
 	#talent-groups {
-	display: flex;
-	justify-content: space-between;
-	gap: 20px;
-	grid-template-rows: repeat(3, auto);
+		display: flex;
+		justify-content: space-between;
+		gap: 20px;
+		grid-template-rows: repeat(3, auto);
 	}
 
 	/* Talent Group Styles */
 	.talent-group-wrapper {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	background-color: #555;
-	padding: 10px;
-	border-radius: 5px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		background-color: #555;
+		padding: 10px;
+		border-radius: 5px;
 	}
 
 	.talent-group-info {
-	font-size: 14px;
-	margin-bottom: 10px;
+		font-size: 14px;
+		margin-bottom: 10px;
 	}
 
 	.talent-group {
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	grid-template-rows: repeat(2, 1fr);
-	gap: 5px;
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		grid-template-rows: repeat(2, 1fr);
+		gap: 5px;
 	}
 
 	/* Ability Styles */
-	.ability {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	background-color: #333;
-	color: white;
-	font-size: 18px;
-	border: 5px solid #333;
-	cursor: pointer;
-	user-select: none;
-	position: relative;
-	height: 100px;
-	width: 100px; /* Set width to match grid column size */
-	margin-bottom: 5px;
+	.card {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		background-color: #333;
+		color: white;
+		font-size: 18px;
+		border: 5px solid #333;
+		cursor: pointer;
+		user-select: none;
+		position: relative;
+		height: 100px;
+		width: 100px;
+		/* Set width to match grid column size */
+		margin-bottom: 5px;
 	}
 
-	.ability.selected {
-	border-color: #ffa800;
+	.card.selected {
+		border-color: #ffa800;
 	}
 
-	.ability img {
-	pointer-events: none;
-	width: 40px;
-	height: 40px;
-	image-rendering: pixelated;
+	.card img {
+		pointer-events: none;
+		width: 40px;
+		height: 40px;
+		image-rendering: pixelated;
 	}
 
-	.ability span {
-	font-size: 14px;
-	margin-top: 5px;
+	.card span {
+		font-size: 14px;
+		margin-top: 5px;
 	}
 
 	/* Ability Hover Effects */
-	.ability:hover {
-	background-color: #222;
-	border-color: #222;
+	.card:hover {
+		background-color: #222;
+		border-color: #222;
 	}
 
-	.ability.selected:hover {
-	border-color: #ffa800;
+	.card.selected:hover {
+		border-color: #ffa800;
 	}
 
-	/* Specific Ability Positions */
-	#talent-container .ability:nth-child(5)::after,
-	#talent-container .ability:nth-child(7)::after,
-	#talent-container .ability:nth-child(11)::after,
-	#talent-container .ability:nth-child(13)::after,
-	#talent-container .ability:nth-child(17)::after {
-	content: "";
-	width: 15px;
-	height: 5px;
-	background-color: red;
-	right: 0px;
-	transform: translateX(23px);
-	position: absolute;
+	/* Linked talent styling */
+	.talent:nth-child(5)::after,
+	.talent:nth-child(7)::after,
+	.talent:nth-child(11)::after,
+	.talent:nth-child(13)::after,
+	.talent:nth-child(17)::after {
+		content: "";
+		width: 15px;
+		height: 5px;
+		background-color: red;
+		right: 0px;
+		transform: translateX(23px);
+		position: absolute;
 	}
 
 	/* Ability Group that Stacks Vertically */
 	.ability-group {
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
-	width: 100px; /* Ensure same width as grid columns */
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		width: 100px;
+		/* Ensure same width as grid columns */
 	}
 
 
 	#import-export-fields {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	margin-top: 30px;
-	padding: 20px;
-	background: #333333;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-top: 30px;
+		padding: 20px;
+		background: #333333;
 	}
 
 	#import-wrapper {
-	display: flex;
-	gap: 10px;
+		display: flex;
+		gap: 10px;
 	}
 
 	#pasteArea {
-	min-height: 43.2px;
-	color: black;
-	width: 500px;
-	padding: 0 10px;
-	padding-top: 16px;
-	box-sizing: border-box;
-	line-height: 1px;
-	text-wrap: nowrap;
-	overflow-y: hidden;
-	overflow-x: scroll;
+		min-height: 43.2px;
+		color: black;
+		width: 500px;
+		padding: 0 10px;
+		padding-top: 16px;
+		box-sizing: border-box;
+		line-height: 1px;
+		text-wrap: nowrap;
+		overflow-y: hidden;
+		/* overflow-x: scroll; */
 	}
 
 	/* Style for the toast message */
 	.toast {
-	visibility: hidden; /* Hidden by default */
-	min-width: 250px;
-	background-color: #333;
-	color: #fff;
-	text-align: center;
-	border-radius: 5px;
-	padding: 15px;
-	position: fixed;
-	z-index: 1;
-	bottom: 30px; /* Position the toast at the bottom */
-	left: 50%;
-	transform: translateX(-50%);
-	font-size: 17px;
-	opacity: 0;
-	transition: opacity 0.5s, visibility 0.5s;
+		visibility: hidden;
+		/* Hidden by default */
+		min-width: 250px;
+		background-color: #333;
+		color: #fff;
+		border: 1px solid #ffffff6d;
+		text-align: center;
+		border-radius: 5px;
+		padding: 15px;
+		position: fixed;
+		z-index: 1;
+		bottom: 30px;
+		/* Position the toast at the bottom */
+		left: 50%;
+		transform: translateX(-50%);
+		font-size: 17px;
+		opacity: 0;
+		transition: opacity 0.5s, visibility 0.5s;
 	}
 
 	/* Show the toast (visible and fade in) */
 	.toast.show {
-	visibility: visible;
-	opacity: 1;
+		visibility: visible;
+		opacity: 1;
 	}
 
 	/* Footer */
 	#footer {
-	margin-top: 50px;
-	margin-bottom: 30px;
+		margin-top: 50px;
+		margin-bottom: 30px;
 	}
 
 
 	#shareable-link {
-	position: absolute; 
-	left: -9999px;
+		position: absolute;
+		left: -9999px;
 	}
 
 
 	/* Responsive styles */
 	@media screen and (max-width: 1316px) {
-		 .main {
-			 grid-template-columns: 435px 25px 715px;
-		 }
-		 
+		.main {
+			grid-template-columns: 435px 25px 715px;
+		}
+
 		.container {
-		  padding: 20px 50px;
-		  display: flex;
-		  flex-direction: column;
-		  align-items: center;
-		  width: 100%;
+			padding: 20px 50px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			width: 100%;
 		}
 
 		/* .grid, #talent-grid {
@@ -323,7 +410,7 @@
 
 		*/
 		#pasteArea {
-		  width: 100%;
+			width: 100%;
 		}
 	}
 
@@ -332,86 +419,88 @@
 			grid-template-columns: min-content;
 			gap: 5px;
 		}
+
 		.grid {
-		  grid-template-columns: repeat(3, 1fr);
+			grid-template-columns: repeat(3, 1fr);
 		}
-			
+
 		#talent-grid {
-		  grid-template-columns: repeat(3, 1fr);
-		  gap: 0px;
+			grid-template-columns: repeat(3, 1fr);
+			gap: 0px;
 		}
+
 		#talent-groups {
-		  flex-wrap: wrap;
-		  column-gap: 0px;
+			flex-wrap: wrap;
+			column-gap: 0px;
 		}
-		
+
 	}
 
 
 	@media screen and (max-width: 768px) {
 		.grid {
-		  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+			grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
 		}
 
 		#talent-grid {
-		  grid-template-columns: repeat(4, minmax(90px, 1fr));
+			grid-template-columns: repeat(4, minmax(90px, 1fr));
 		}
 
 		#talent-groups {
-		  flex-wrap: wrap;
+			flex-wrap: wrap;
 		}
 
 		.ability {
-		  height: 80px;
-		  width: 80px;
+			height: 80px;
+			width: 80px;
 		}
 
 		.ability img {
-		  width: 30px;
-		  height: 30px;
+			width: 30px;
+			height: 30px;
 		}
 
 		.ability span {
-		  font-size: 12px;
+			font-size: 12px;
 		}
 
 		#description-box {
-		  display: none;
+			display: none;
 		}
 
 		#import-export-fields {
-		  flex-direction: column;
-		  align-items: stretch;
-		  gap: 10px;
+			flex-direction: column;
+			align-items: stretch;
+			gap: 10px;
 		}
 
 		#pasteArea {
-		  width: 100%;
-		  margin: 10px 0;
+			width: 100%;
+			margin: 10px 0;
 		}
 	}
 
 	@media screen and (max-width: 480px) {
-	.grid {
-	  grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
-	}
+		.grid {
+			grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+		}
 
-	.ability {
-	  height: 60px;
-	  width: 60px;
-	}
+		.ability {
+			height: 60px;
+			width: 60px;
+		}
 
-	.ability img {
-	  width: 25px;
-	  height: 25px;
-	}
+		.ability img {
+			width: 25px;
+			height: 25px;
+		}
 
-	.ability span {
-	  font-size: 10px;
-	}
+		.ability span {
+			font-size: 10px;
+		}
 
-	.tab-button {
-	  padding: 8px 15px;
-	  font-size: 14px;
-	}
+		.tab-button {
+			padding: 8px 15px;
+			font-size: 14px;
+		}
 	}
