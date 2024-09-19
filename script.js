@@ -1691,8 +1691,8 @@ function saveBuild(name) {
   updateBuildMenu();
 }
 
-// Load build from local storage
-function loadBuild(name) {
+// Load build
+function loadSavedBuild(name) {
   const builds = JSON.parse(localStorage.getItem('vhBuilds') || '{}');
   const build = builds[name];
   if (build) {
@@ -1701,6 +1701,17 @@ function loadBuild(name) {
     showToast(`Build "${name}" loaded successfully!`);
   }
 }
+
+// Load build
+function loadSuggestedBuild(name) {
+  const build = suggested_builds[name];
+  if (build) {
+    importData(build.data);
+    saveCurrentBuild();
+    showToast(`Build "${name}" loaded successfully!`);
+  }
+}
+
 
 // Delete build from local storage
 function deleteBuild(name) {
@@ -1751,18 +1762,11 @@ function updateBuildMenu() {
         <img src="${buildIcon}" alt="${name}" width="24" height="24">
         <span>${name}</span>
         <button class="load-build">Load</button>
-        <button class="delete-build">Delete</button>
       `;
 
     buildItem.querySelector('.load-build').addEventListener('click', () => {
       if (confirm(`Are you sure you want to load the build "${name}"? This will overwrite your current build.`)) {
-        loadBuild(name);
-      }
-    });
-
-    buildItem.querySelector('.delete-build').addEventListener('click', () => {
-      if (confirm(`Are you sure you want to delete the build "${name}"?`)) {
-        deleteBuild(name);
+        loadSuggestedBuild(name);
       }
     });
     suggestedBuildsDiv.appendChild(buildItem);
@@ -1791,7 +1795,7 @@ function updateBuildMenu() {
 
       buildItem.querySelector('.load-build').addEventListener('click', () => {
         if (confirm(`Are you sure you want to load the build "${name}"? This will overwrite your current build.`)) {
-          loadBuild(name);
+          loadSavedBuild(name);
         }
       });
 
