@@ -10,18 +10,32 @@
       <div class="container">
          <div class="header">
             <h1 id="page-title">Vault Hunters - Build builder</h1>
+            <div class="header-buttons">
+            <button class="tab-button" id="menu-button">Saved Builds</button>
+            <button class="tab-button" id="reset-button">Reset</button>
          </div>
+         </div>
+         <div id="build-menu-wrapper">
+            <div id="build-menu">
+               <div id="saved-builds"></div>
+               <div id="suggested-builds"></div>
+            </div>
+          </div>
          <div class="main">
             <div class="main-left-column">
                <!-- Tabs for Abilities and Talents -->
                <div class="tabs">
                   <button class="tab-button active" id="abilities-tab">Abilities</button>
                   <button class="tab-button" id="talents-tab">Talents</button>
+                  <div class="build-icon card">
+                     <span>Icon:</span>
+                     <img id="build-icon" src="https://api.vaulthunters.gg/static/sprites/abilities/heal.png" alt="Heal">
+                  </div>
                </div>
                <div id="required-level-wrapper">Required level: <span id="required-level">10</span></div>
                <!-- Ability/Talent description -->
                <div id="description-box">
-                  <p id="description-text">Hover over an ability or talent to see its description. Left click to add a level. Right click to remove a level. Control + click maxes it out.</p>
+                  <p id="description-text"><i>Hover over an ability or talent to see its description.</i> <br> <b>Left click</b> to add a level. <br> <b>Right click</b> to remove a level.  <br> <b>Control + click</b> to set it to its max level. <br> <b>Alt + click</b> to set the build icon.</p>
                </div>
             </div>
             <div class="main-right-column">
@@ -51,12 +65,13 @@
          </div>
          <div id="import-export-fields">
             <div id="export-wrapper">
+               <button class="tab-button" id="save-button">Save</button>
                <button class="tab-button" id="share-button">Share</button>
                <button class="tab-button" id="export-button">Export</button>
                <input type="text" id="shareable-link" readonly/>
             </div>
             <div id="import-wrapper">
-               <textarea id="pasteArea" placeholder="Paste data here..."></textarea><button class="tab-button" id="importButton">Import Data</button>
+               <textarea id="pasteArea" placeholder="Paste build string here..."></textarea><button class="tab-button" id="importButton">Load Build</button>
             </div>
          </div>
          <div id="toast" class="toast">Build string exported!</div>
