@@ -309,7 +309,7 @@ const abilities = [
     options: [
       {
         name: "Javelin",
-        id: "Javalin_Base",
+        id: "Javelin_Base",
         icon: "javelin.png",
         description: `Summon a magical Javelin to hit your foes afar. Deals an amount of damage based of your weapon damage and knocks mobs away on impact`,
         level: 0
